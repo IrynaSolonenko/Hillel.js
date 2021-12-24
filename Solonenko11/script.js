@@ -171,3 +171,4 @@ function filterByCategoryPriceSum(filter,productArr){
 let filterPriceSumResult3 = filterByCategoryPriceSum('pencil', productsList)
 // console.log(filterPriceSumResult3)
 
+let checkGitProject;
