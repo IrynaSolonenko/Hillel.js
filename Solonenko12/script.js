@@ -34,6 +34,5 @@ function getBookList(part, chapter, view) {
         }
         console.table(arr)
     }
-
 }
 getBookList(1, 3, 'number')
