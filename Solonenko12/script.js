@@ -1,5 +1,6 @@
 let listSub;
 let listLink;
+let arr = [];
 function getBookList(part, chapter, view) {
     let list1 = document.querySelectorAll('.list')[0];
     let list2 = document.querySelectorAll('.list')[1];
@@ -13,22 +14,26 @@ function getBookList(part, chapter, view) {
     }
     listLink = listSub.querySelectorAll('.list-sub__link');
     if (view === 'dash') {
-        view = '-';
         for (let elem of listLink) {
-            console.log(`${view} ${elem.innerText}`)
+            console.log(`${'-'} ${elem.innerText}`);
+            arr.push(`${'-'} ${elem.innerText}`);
         }
+        console.table(arr)
     } else if(view === 'number') {
         for ( let i=0; i < listLink.length; i += 1) {
            let numberNum = (i+1) + '. ' + listLink[i].innerText;
             console.log(numberNum);
+            arr.push(numberNum);
         }
+        console.table(arr)
         } else if (view === 'current'){
         for ( let i=0; i < listLink.length; i += 1) {
             let currentNum = (i + 1) +' '+ listLink[i].innerText;
             console.log(`${chapter}.${currentNum}`)
+            a.push(chapter, currentNum)
         }
+        console.table(arr)
     }
 
 }
-getBookList(1, 3, 'current')
-
+getBookList(1, 3, 'number')
