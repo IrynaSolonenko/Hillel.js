@@ -2,13 +2,8 @@ let listSub;
 let listLink;
 let arr = [];
 function getBookList(part, chapter, view) {
-    let list = document.querySelectorAll('.list');
-    if (part === 1) {
-        listSub = (list[0].getElementsByClassName('list-sub')[chapter - 1]);
-    } else if (part === 2) {
-        listSub = (list[1].getElementsByClassName('list-sub')[chapter - 1]);
-    } else if (part === 3) {
-        listSub = (list[2].getElementsByClassName('list-sub')[chapter - 1]);
+    if (part) {
+        listSub = (document.querySelectorAll('.list')[part-1].getElementsByClassName('list-sub')[chapter - 1]);
     } else if (part !== part || !part >= 1 || !part <= 3 || (typeof part) !== 'Number') {
         console.warn('the entered data "part" is incorrect');
     }
@@ -28,11 +23,11 @@ function getBookList(part, chapter, view) {
             arr.push(chapter, currentNum);
         } else if (view !== view || (typeof view) !== 'String') {
             console.warn('the entered data "view" is incorrect')
-        }  else if (chapter !== chapter || chapter < 0 || chapter > 28 || (typeof chapter) !== 'Number') {
-            console.warn('the entered data "chapter" is incorrect');
+        // }  else if (chapter !== chapter || chapter < 0 || chapter > 28 || (typeof chapter) !== 'Number') {
+        //     console.warn('the entered data "chapter" is incorrect');
+        //    возникают проблемы с валидацией данных. Путаюсь куда ее вставлять
         }
     }
-
     console.table(arr)
 }
-getBookList(17, 1,  'dash')
+getBookList(1, 1,  'dash')
