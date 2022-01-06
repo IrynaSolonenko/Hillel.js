@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
+    <list default="true" id="6bf81ca6-b6b0-41d9-9b6d-9ccdb7e7c317" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Solonenko11/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Solonenko11/index.html" afterDir="false" />
+    </list>
+=======
     <list default="true" id="6bf81ca6-b6b0-41d9-9b6d-9ccdb7e7c317" name="Changes" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,12 +16,22 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="22gmH6AfguQxPcEzQcXILanmInW" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -25,6 +41,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -51,7 +68,21 @@
       <option name="project" value="LOCAL" />
       <updated>1640374789153</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add new js file">
+      <created>1640375967066</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1640375967066</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add style.css">
+      <created>1640379631365</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1640379631365</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -59,6 +90,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="change place gitignore file" />
-    <option name="LAST_COMMIT_MESSAGE" value="change place gitignore file" />
+    <MESSAGE value="add new js file" />
+    <MESSAGE value="add style.css" />
+    <option name="LAST_COMMIT_MESSAGE" value="add style.css" />
   </component>
 </project>
