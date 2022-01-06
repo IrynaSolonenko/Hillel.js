@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="6bf81ca6-b6b0-41d9-9b6d-9ccdb7e7c317" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/Solonenko11/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Solonenko11/index.html" afterDir="false" />
     </list>
+=======
+    <list default="true" id="6bf81ca6-b6b0-41d9-9b6d-9ccdb7e7c317" name="Changes" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
