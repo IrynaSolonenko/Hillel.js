@@ -1,13 +1,14 @@
 let listSub;
 let listLink;
 let arr = [];
-function getBookList(part, chapter, view) {
+function getBookList(part, chapter, view) { // необходимо провалидировать part и chapter на числа
     if (part) {
         listSub = (document.querySelectorAll('.list')[part-1].getElementsByClassName('list-sub')[chapter - 1]);
+        // вот тут нужно проверить есть ли такая часть и, если нет (null), прервать выполнение
     } else if (part !== part || !part >= 1 || !part <= 3 || (typeof part) !== 'Number') {
         console.warn('the entered data "part" is incorrect');
     }
-    listLink = listSub.querySelectorAll('.list-sub__link');
+    listLink = listSub.querySelectorAll('.list-sub__link'); // необходима проверка на существование listLink
     for (let i = 0; i < listLink.length; i += 1) {
         if (view === 'dash') {
             let elem = listLink[i];
