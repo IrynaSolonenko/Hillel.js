@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HW#14</title>
+  <script src="script.js" async></script>
+</head>
+  <style>
+    body{
+      position: relative;
+      padding: 0;
+      margin: 0;
+    }
+    button{
+      color: white;
+      font-size: 20px;
+      background-color: red;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+    }
+    .button:hover{
+      color: red;
+      background-color: white;
+    }
+    .modal{
+      background-color: #699494;
+      padding: 60px;
+      position: absolute;
+      display: inline-block;
+      top: 30%;
+      left: 26%;
+    }
+
+    .modal-window{
+      font-size: 24px;
+      margin: 0 auto;
+    }
+    .button-close{
+      font-size: 26px;
+      background-color: #2b8fc5;
+      padding:3px 5px;
+      color: white;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      top: 0;
+      border: 1px solid blue;
+    }
+    .button-close:hover{
+      background-color: #17668c;
+    }
+    .background{
+      background-color: rgba(128, 128, 128, 0.5);
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      position: absolute;
+    }
+  </style>
+<body>
+<div class="window">
+  <div class="background">
+    <div class="modal">
+      <p class="modal-window">I'm a modal window. Hello!</p>
+      <span class="button-close">[x]</span>
+    </div>
+  </div>
+  <button class="button">I'm a Button!</button>
+</div>
+</body>
+</html>
