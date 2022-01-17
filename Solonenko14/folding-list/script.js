@@ -34,7 +34,7 @@ listenedBlocks.forEach((listenedBlock)=>{
                 event.target.classList.toggle('show');
                 elem.classList.remove('show');
             } else {
-                elem.classList.remove('show');
+                event.classList.remove('show');
             }
         })
     });
