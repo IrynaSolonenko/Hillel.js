@@ -8,9 +8,8 @@ let amountTime;
 let sumMandarin;
 let lastScoreInfo;
 let lastScoreInfoArr = [];
-let mandarinBestScore = document.querySelector('.mandarin-best-score')
-
-let restartButton = document.querySelector('#restartButton')
+let mandarinBestScore = document.querySelector('.mandarinBestScore');
+let restartButton = document.querySelector('#restartButton');
 
 
 let mandarinsAmount = 0;
@@ -83,7 +82,6 @@ startButton.addEventListener('click', event =>{
     icon.style.display = 'block';
     resetGame();
     startButton.disabled = true;
-    restartButton.disabled = false;
     grinchIntervalDelay = Math.round(Math.random() * gameDuration);
     mandarinInterval = setInterval(setMandarinPosition, 1000);
     gameInterval = setInterval(startGame, 1000);
@@ -93,29 +91,33 @@ startButton.addEventListener('click', event =>{
 restartButton.addEventListener('click', event => {
     startButton.disabled = false;
     resetGame();
-   gameTime.textContent = `Game over!`
+    gameTime.textContent = `Game over!`
     icon.style.display = 'none';
     clearInterval(gameInterval);
     clearInterval(mandarinInterval);
-
-    //Создаем табличку с последними данными
-    lastScoreInfo = {
-        time: amountTime,
-        amount: sumMandarin
-    }
-// if (sumMandarin !== sumMandarin) {sumMandarin = '';}
-    lastScoreInfoArr.push(lastScoreInfo)
-    // lastScoreInfoArr.splice(3, [lastScoreInfo.length]);
-    console.log(lastScoreInfo)
-
-    for (let key in lastScoreInfo){
-        let row = document.createElement('tr');
-        row.innerHTML = `<td>${amountTime}</td><td>${sumMandarin}</td>`
-        document.querySelector('.resultTable').appendChild(row)
-    }
+    addlastScoreInfo();
 });
 
+function addlastScoreInfo(){
+    //Создаем табличку с последними данными
+    lastScoreInfo = [amountTime, sumMandarin]
+
+    lastScoreInfoArr.push(lastScoreInfo)
+    lastScoreInfoArr.splice(1, lastScoreInfoArr.length);
+    // console.log(lastScoreInfoArr[lastScoreInfoArr.length-1])
+    console.log(lastScoreInfoArr)
+
+    for (let key in lastScoreInfoArr) {
+        let info = document.createElement('tr');
+        if (typeof sumMandarin === 'undefined'){
+            sumMandarin = 0;
+        }
+        info.innerHTML = `<td>${amountTime}</td><td>${sumMandarin}</td>`;
+        mandarinBestScore.appendChild(info);
+        // if (info.length > 1) return;
+    }
+}
 
 
-
-
+// let bestAmount = (a, b) => a.amount > b.amount ? 1 : -1;
+// let amountAmount = lastScoreInfoArr.sort(bestAmount);
