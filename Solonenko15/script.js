@@ -81,6 +81,7 @@ startButton.addEventListener('click', event =>{
     setMandarinPosition()
     icon.style.display = 'block';
     resetGame();
+    sumMandarin = 0;
     startButton.disabled = true;
     grinchIntervalDelay = Math.round(Math.random() * gameDuration);
     mandarinInterval = setInterval(setMandarinPosition, 1000);
@@ -97,15 +98,22 @@ restartButton.addEventListener('click', event => {
     clearInterval(mandarinInterval);
     addlastScoreInfo();
 });
-
+let bestScore;
 function addlastScoreInfo(){
     //Создаем табличку с последними данными
-    lastScoreInfo = [amountTime, sumMandarin]
+    lastScoreInfo = {
+        time: amountTime,
+        amount: sumMandarin
+    }
+    lastScoreInfoArr.push(lastScoreInfo);
+    lastScoreInfoArr.forEach(amounts=>{
+        lastScoreInfoArr.sort(amounts = (a, b) => a.amount < b.amount ? 1 : -1);
+    })
 
-    lastScoreInfoArr.push(lastScoreInfo)
-    lastScoreInfoArr.splice(1, lastScoreInfoArr.length);
-    // console.log(lastScoreInfoArr[lastScoreInfoArr.length-1])
-    console.log(lastScoreInfoArr)
+    if (lastScoreInfoArr.length > 1){
+        lastScoreInfoArr.splice(2, lastScoreInfoArr.length);
+        console.log(lastScoreInfoArr);
+    }
 
     for (let key in lastScoreInfoArr) {
         let info = document.createElement('tr');
@@ -113,11 +121,6 @@ function addlastScoreInfo(){
             sumMandarin = 0;
         }
         info.innerHTML = `<td>${amountTime}</td><td>${sumMandarin}</td>`;
-        mandarinBestScore.appendChild(info);
-        // if (info.length > 1) return;
+        mandarinBestScore.append(info);
     }
 }
-
-
-// let bestAmount = (a, b) => a.amount > b.amount ? 1 : -1;
-// let amountAmount = lastScoreInfoArr.sort(bestAmount);
