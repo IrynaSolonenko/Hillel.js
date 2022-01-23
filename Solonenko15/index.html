@@ -64,6 +64,24 @@
     .mandarin{
       display: none;
     }
+    .last-score, .best-score{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .restartBestResult{
+      color: #ffffff;
+      background-color: #e0b651;
+      font-size: 16px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+    h3{
+      margin: 5px;
+    }
+    td{
+      padding: 8px;
+    }
 
   </style>
 </head>
@@ -88,8 +106,9 @@
     </div>
   </div>
 
-  <div class="best-score" id="bestScore">
-    <table  class="mandarinBestScore" border="1">
+  <div class="last-score" id="lastScore">
+    <h3>Last Score</h3>
+    <table class="mandarinLastScore" border="1">
       <colgroup>
         <col>
         <col style="background-color: #75a470">
@@ -98,8 +117,21 @@
         <th>Time</th>
         <th>Amount</th>
       </tr>
-
     </table>
+  </div>
+  <div class="best-score">
+    <h3>Best Score</h3>
+    <table class="mandarinBestScore" id="mandarinBestScore" border="1">
+      <colgroup>
+        <col>
+        <col style="background-color: #75a470">
+      </colgroup>
+      <!--      <tr>-->
+      <!--        <th>Time</th>-->
+      <!--        <th>Amount</th>-->
+      <!--      </tr>-->
+    </table>
+    <button class="restartBestResult" id="restartBestResult">restart best result</button>
   </div>
 </div>
 
