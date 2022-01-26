@@ -11,14 +11,13 @@ let lastScoreInfoArr = [];
 let mandarinLastScore = document.querySelector('.mandarinLastScore');
 let restartButton = document.querySelector('#restartButton');
 let restartBestResult = document.querySelector('#restartBestResult');
-
+let mandarinBestScore = document.querySelector('#mandarinBestScore');
 
 let mandarinsAmount = 0;
 let gameDuration = 5;
 let gameInterval;
 let mandarinInterval;
 let grinchIntervalDelay;
-let bestScore;
 let bestScoreInfoArr;
 
 
@@ -90,6 +89,8 @@ startButton.addEventListener('click', event =>{
     gameInterval = setInterval(startGame, 1000);
 });
 
+
+
 //Блокируем кнопку старта вовремя игры и добавляем возможность остановить игру в любой момент
 restartButton.addEventListener('click', event => {
     startButton.disabled = false;
@@ -98,21 +99,23 @@ restartButton.addEventListener('click', event => {
     icon.style.display = 'none';
     clearInterval(gameInterval);
     clearInterval(mandarinInterval);
-    addlastScoreInfo();
+    addLastScoreInfo();
 });
 
-function addlastScoreInfo() {
-    //Создаем табличку с последними данными
+//Создаем табличку с результатом
+function addLastScoreInfo() {
     lastScoreInfo = {
         time: amountTime,
         amount: sumMandarin
     }
     lastScoreInfoArr.push(lastScoreInfo);
+    lastScoreInfoArr.forEach(amounts => {
+        lastScoreInfoArr.sort(amounts = (a, b) => a.amount < b.amount ? 1 : -1);
 
-    if (lastScoreInfoArr.length > 1) {
-        lastScoreInfoArr.splice(2, lastScoreInfoArr.length - 1);
-    }
-
+    })
+    lastScoreInfoArr.splice(2, lastScoreInfoArr.length - 1);
+    bestScoreInfoArr = lastScoreInfoArr.slice(0, 1)
+    console.log(lastScoreInfoArr)
 
     //добавляем последние результаты в Last Score
     for (let key in lastScoreInfoArr) {
@@ -129,19 +132,15 @@ function addlastScoreInfo() {
     }
 }
 
+//добавляем результаты в Best Score
 restartBestResult.addEventListener('click', bestScoreArr)
 function bestScoreArr(){
-    //добавляем результаты в Best Score
-    lastScoreInfoArr.forEach(amounts => {
-        lastScoreInfoArr.sort(amounts = (a, b) => a.amount < b.amount ? 1 : -1);
-    })
-    bestScoreInfoArr = lastScoreInfoArr.slice()
-    for (let key in bestScoreInfoArr) {
+    bestScoreInfoArr.forEach(elem =>{
         let best = document.createElement('tr');
-        best.innerHTML += `<td style="padding: 8px;">${key.time}</td><td style="padding: 8px;">${key.amount}</td>`;
+        best.innerHTML = `<td style="padding: 8px;">${elem.time}</td><td style="padding: 8px;">${elem.amount}</td>`;
         mandarinBestScore.innerHTML = '';
         mandarinBestScore.append(best);
-    }
+        console.log(bestScoreInfoArr)
+    })
 
-    console.log(bestScoreInfoArr)
 }
