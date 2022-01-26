@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mandarin</title>
+  <style>
+    html, body{
+      height: 100%;
+    }
+    body{
+      background-color: aquamarine;
+      font-family: "Andale Mono";
+    }
+    .game-container{
+      text-align: center;
+      margin: auto;
+    }
+    .game-canvas{
+      margin: 0 auto;
+      width: 300px;
+      height: 300px;
+      background-color: white;
+      position: relative;
+
+    }
+    .game-title{
+      text-transform: uppercase;
+      color: #0b6ab8;
+    }
+    .icon{
+      cursor: pointer;
+      display: none;
+      position: absolute;
+    }
+    .mandarin, .grinch, .tree{
+      width: 30px;
+      height: 30px;
+    }
+    .grinch{
+      display: none;
+    }
+    .mandarins-amount{
+      text-align: center;
+    }
+    .button{
+      border: 1px solid orange;
+      padding: 5px 10px;
+      font-size: 14px;
+      background-color: #e0b651;
+      text-align: center;
+      cursor: pointer;
+    }
+    .restart-button{
+      border: 1px solid #1a2a18;
+      padding: 5px 10px;
+      font-size: 14px;
+      background-color: #578851;
+      text-align: center;
+      cursor: pointer;
+      color: white;
+    }
+    .tree{
+      display: none;
+    }
+    .mandarin{
+      display: none;
+    }
+    .last-score, .best-score{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .restartBestResult{
+      color: #ffffff;
+      background-color: #e0b651;
+      font-size: 16px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+    h3{
+      margin: 5px;
+    }
+    td{
+      padding: 8px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="game-container">
+  <h1 class="game-title">Mandarin resque</h1>
+  <div class="game-canvas">
+    <div class="icon" id="icon">
+      <img alt="mandarin" class="mandarin" src="images/mandarin.png">
+      <img alt="grinch" class="grinch" src="images/grinch.png">
+    </div>
+  </div>
+
+  <div class="game-info">
+    <p class="mandarins-amount" id="mandarinsAmount">You caught 0 mandarins</p>
+    <p class="game-time" id="gameTime">15 seconds left</p>
+    <div class="buttons-container">
+      <button class="button" id="startButton">start</button>
+      <button class="restart-button" id="restartButton">restart game</button>
+    </div>
+  </div>
+
+  <div class="last-score" id="lastScore">
+    <h3>Last Score</h3>
+    <table class="mandarinLastScore" border="1">
+      <colgroup>
+        <col>
+        <col style="background-color: #75a470">
+      </colgroup>
+      <tr>
+        <th>Time</th>
+        <th>Amount</th>
+      </tr>
+    </table>
+  </div>
+  <div class="best-score">
+    <h3>Best Score</h3>
+    <table class="mandarinBestScore" id="mandarinBestScore" border="1">
+      <colgroup>
+        <col>
+        <col style="background-color: #75a470">
+      </colgroup>
+      <tr>
+        <th>Best Time</th>
+        <th>Best Amount</th>
+      </tr>
+    </table>
+    <button class="restartBestResult" id="restartBestResult">restart best result</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
