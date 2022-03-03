@@ -1,6 +1,7 @@
 body{
     padding: 40px;
 }
+
 .form-control{
     margin-bottom: 10px ;
 }
@@ -11,7 +12,7 @@ body{
 }
 .card{
     margin: 0 20px 20px;
-    padding: 20px;
+    padding: 20px 30px;
 }
 .card--importance{
      box-shadow: -5px -5px 25px -5px rgba(13, 110, 253, 0.6) inset;
@@ -23,4 +24,8 @@ body{
     display: flex;
     justify-content: flex-start;
     align-items: center;
+}
+
+.button-sort{
+    position: relative;
 }
