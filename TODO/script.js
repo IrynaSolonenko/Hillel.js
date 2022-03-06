@@ -260,6 +260,14 @@
             this._updateLS();
             this._updateBlock();
         }
+
+        _sortByIsDone(){
+            this.cardsArr = this.cardsArr.sort(function (a, b) {
+                return a.isDone > b.isDone ? 1 : -1;
+            })
+            this._updateLS();
+            this._updateBlock();
+        }
     }
 
     class Card {
@@ -305,7 +313,7 @@
                     this.element.classList.add('card--done');
                     this._importanceCheckbox.setAttribute('disabled', 'checked');
                     this._updateButton.setAttribute('disabled', 'checked');
-                    app._sortByNotImportant();
+                    app._sortByIsDone();
                 } else {
                     this.element.classList.remove('card--done');
                     this._importanceCheckbox.removeAttribute('disabled');
