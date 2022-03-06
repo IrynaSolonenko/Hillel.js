@@ -13,10 +13,12 @@ body{
 .card{
     margin: 0 20px 20px;
     padding: 20px 30px;
+    position: relative;
 }
 .card--importance{
-     box-shadow: -5px -5px 25px -5px rgba(13, 110, 253, 0.6) inset;
+     box-shadow: -5px -5px 25px -5px rgb(13 110 253 / 81%) inset;
 }
+
 .btn{
     margin-right: 10px;
 }
@@ -29,3 +31,19 @@ body{
 .button-sort{
     position: relative;
 }
+ #doneCheckbox {
+    margin: 0 0 0 15px;
+}
+/*.done{*/
+/*    position: relative;*/
+/*}*/
+
+ .card--done{
+     /*position: absolute;*/
+     /*top: 0;*/
+     /*bottom: 0;*/
+     /*left: 0;*/
+     /*right: 0;*/
+     /*pointer-events: none;*/
+     background-color: rgba(184, 210, 250, 0.25) !important;
+ }
