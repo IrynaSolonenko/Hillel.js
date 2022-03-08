@@ -227,6 +227,11 @@
                 this._cardsBlock.append(card.element)
             })
         }
+        _updatePrependBlock() {
+            this.cardsArr.forEach(card => {
+                this._cardsBlock.prepend(card.element)
+            })
+        }
 
         //создаем методы для сортировки в алфавитном порядке по названию карточки
         sortByName() {
@@ -238,7 +243,7 @@
         }
 
         sortByNameReverse() {
-            this.cardsArr = this.cardsArr.reverse(function (a, b) {
+            this.cardsArr = this.cardsArr.sort(function (a, b) {
                 return a.title < b.title ? 1 : -1;
             })
             this._updateLS();
@@ -312,12 +317,9 @@
                 if (this.isDone){
                     this.element.classList.add('card--done');
                     this._importanceCheckbox.setAttribute('disabled', 'checked');
+                    this._doneCheckbox.setAttribute('disabled', 'checked');
                     this._updateButton.setAttribute('disabled', 'checked');
                     app._sortByIsDone();
-                } else {
-                    this.element.classList.remove('card--done');
-                    this._importanceCheckbox.removeAttribute('disabled');
-                    this._updateButton.removeAttribute('disabled');
                 }
             })
         }
@@ -371,7 +373,9 @@
             if (this.isDone){
                 this._doneCheckbox.setAttribute('checked', 'checked');
                 cardElement.classList.add('card--done');
-
+            } else {
+                this._doneCheckbox.removeAttribute('checked');
+                cardElement.classList.remove('card--done');
             }
             let doneCheckboxLabel = createElement({
                 tagName: 'label',
