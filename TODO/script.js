@@ -1,43 +1,42 @@
 'use strict';
 !(function (){
     function createElement({tagName = 'div', classes = [], attributes: attributes = {}, textContent = ''}){
-    if (typeof tagName !== 'string'){
-        console.warn('tagName _createElement method of App must me string');
-        let errorElement = document.createElement('div');
-        errorElement.textContent = 'tagName _createElement method of App must be a string';
-        return errorElement;
-    }
+        if (typeof tagName !== 'string'){
+            console.warn('tagName _createElement method of App must me string');
+            let errorElement = document.createElement('div');
+            errorElement.textContent = 'tagName _createElement method of App must be a string';
+            return errorElement;
+        }
 
-    let element = document.createElement(tagName);
+        let element = document.createElement(tagName);
 
-    if (typeof textContent === 'string'){
-        element.textContent = textContent;
-    } else {
-        console.warn('tagName _createElement method of App must me string')
+        if (typeof textContent === 'string'){
+            element.textContent = textContent;
+        } else {
+            console.warn('tagName _createElement method of App must me string')
+        }
 
-    }
-
-    if (Array.isArray(classes)){
-        classes.forEach(className =>{
-            if (typeof className === 'string'){
-                element.classList.add(className);
-            } else {
-                console.warn('classes element of App _createElement method must be a string')
-            }
-        })
-    }
+        if (Array.isArray(classes)){
+            classes.forEach(className =>{
+                if (typeof className === 'string'){
+                    element.classList.add(className);
+                } else {
+                    console.warn('classes element of App _createElement method must be a string')
+                }
+            })
+        }
 
 
-    if (typeof attributes === 'object' && attributes){
-        Object.entries(attributes).forEach(pair =>{
-            if (pair[0] !== 'string' || pair[1] !== 'string') {
-                element.setAttribute(pair[0], pair[1]);
-            } else {
-                console.warn('classes element of App _createElement method must be a string')
-            }
-        })
-    }
-    return element;
+        if (typeof attributes === 'object' && attributes){
+            Object.entries(attributes).forEach(pair =>{
+                if (pair[0] !== 'string' || pair[1] !== 'string') {
+                    element.setAttribute(pair[0], pair[1]);
+                } else {
+                    console.warn('classes element of App _createElement method must be a string')
+                }
+            })
+        }
+        return element;
 
     }
 
@@ -227,11 +226,6 @@
                 this._cardsBlock.append(card.element)
             })
         }
-        _updatePrependBlock() {
-            this.cardsArr.forEach(card => {
-                this._cardsBlock.prepend(card.element)
-            })
-        }
 
         //создаем методы для сортировки в алфавитном порядке по названию карточки
         sortByName() {
@@ -282,6 +276,7 @@
             this.isImportance = isImportance;
             this.isDone = isDone;
             this._init();
+            this._setAttribute();
         }
 
         _init(){
@@ -314,14 +309,17 @@
             this._doneCheckbox.addEventListener('change', event =>{
                 this.isDone = this._doneCheckbox.checked;
                 app.updateCard(this, true);
-                if (this.isDone){
-                    this.element.classList.add('card--done');
-                    this._importanceCheckbox.setAttribute('disabled', 'checked');
-                    this._doneCheckbox.setAttribute('disabled', 'checked');
-                    this._updateButton.setAttribute('disabled', 'checked');
-                    app._sortByIsDone();
-                }
+                this._setAttribute();
             })
+        }
+
+        _setAttribute(){
+            if (this.isDone){
+                this.element.classList.add('card--done');
+                this._importanceCheckbox.setAttribute('disabled', 'checked');
+                this._doneCheckbox.setAttribute('disabled', 'checked');
+                this._updateButton.setAttribute('disabled', 'checked');
+            }
         }
 
         _updateCard(){
@@ -340,7 +338,7 @@
             this.textElement = createElement({tagName: 'p', classes: ['card-text'], textContent: this.text})
 
             let controlsContainer = createElement({classes: ['controls-container']})
-             this._updateButton = createElement({
+            this._updateButton = createElement({
                 tagName: 'button',
                 textContent: 'Update card',
                 classes: ['btn', 'btn-primary']
@@ -392,6 +390,6 @@
 
     }
 
-        let app = new App();
+    let app = new App();
 
 }());
