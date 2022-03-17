@@ -43,6 +43,9 @@
     class App {
         constructor() {
             this.cardsArr = [];
+            this.importantArr = [];
+            this.notImportantArr = [];
+            this.doneArr = [];
             this._LS = localStorage;
             this._body = document.querySelector('body');
             this._init();
@@ -64,6 +67,9 @@
 
         _createApp() {
             this.appBlock = createElement({classes: ['container']});
+            this.importantBlock = createElement({classes: ['important'], textContent: 'Important Card'});
+            this.notImportantBlock = createElement({classes: ['not-important'], textContent: 'Not Important Card'});
+            this.doneBlock = createElement({classes: ['done-card'], textContent: 'Done Card'});
             let title = createElement({tagName: 'h1', textContent: 'Awesome TODO app'});
 
             this.sortButton = createElement({
@@ -100,8 +106,7 @@
             });
 
             this.appBlock.append(title, this._nameField, this._descriptionField, this.formButton, this._cardsBlock);
-            this._body.append(this.appBlock);
-
+            this._body.append(this.appBlock, this.importantBlock, this.notImportantBlock, this.doneBlock);
             this._body.before(this.sortButton, this.sortReverseButton);
         }
 
@@ -120,6 +125,24 @@
                 })
                 this.cardsArr.forEach(card => {
                     this._cardsBlock.append(card.element)
+
+                if (card.isImportance){
+                    this.importantArr.push(this.cardsArr.sort(function (a, b) {
+                        return a.isImportance < b.isImportance ? 1 : -1;
+                    }))
+                    this.importantBlock.append(card.element)
+                } else{
+                    this.notImportantArr.push(this.cardsArr.sort(function (a, b) {
+                        return a.isImportance > b.isImportance ? -1 : 1;
+                    }))
+                    this.notImportantBlock.append(card.element)
+                }
+                    if (card.isDone){
+                        this.doneArr.push(this.cardsArr.sort(function (a, b) {
+                            return a.isDone > b.isDone ? 1 : -1;
+                        }))
+                        this.doneBlock.append(card.element)
+                    }
                 })
             }
         }
@@ -165,8 +188,8 @@
 
                 this._updateLS();
                 this.editableCard._updateCard();
-                this._resetForm();
             }
+            this._resetForm();
         }
 
         _resetForm() {
@@ -186,8 +209,6 @@
                 }
             })
             this._LS.setItem('cards', JSON.stringify(cardsStates));
-
-
         }
 
         _validateTextField(field) {
@@ -243,30 +264,6 @@
             this._updateLS();
             this._updateBlock();
         }
-
-        _sortByImportant() {
-            this.cardsArr = this.cardsArr.sort(function (a, b) {
-                return a.isImportance < b.isImportance ? 1 : -1;
-            })
-            this._updateLS();
-            this._updateBlock();
-        }
-
-        _sortByNotImportant() {
-            this.cardsArr = this.cardsArr.sort(function (a, b) {
-                return a.isImportance > b.isImportance ? -1 : 1;
-            })
-            this._updateLS();
-            this._updateBlock();
-        }
-
-        _sortByIsDone(){
-            this.cardsArr = this.cardsArr.sort(function (a, b) {
-                return a.isDone > b.isDone ? 1 : -1;
-            })
-            this._updateLS();
-            this._updateBlock();
-        }
     }
 
     class Card {
@@ -299,18 +296,19 @@
                 app.updateCard(this, true);
                 if (this.isImportance){
                     this.element.classList.add('card--importance');
-                    app._sortByImportant();
+                    app.importantBlock.append(this.element)
                 } else {
                     this.element.classList.remove('card--importance');
-                    app._sortByNotImportant();
+                    app.notImportantBlock.append(this.element);
                 }
             })
-
             this._doneCheckbox.addEventListener('change', event =>{
                 this.isDone = this._doneCheckbox.checked;
+                app.doneBlock.append(this.element);
                 app.updateCard(this, true);
                 this._setAttribute();
             })
+
         }
 
         _setAttribute(){
@@ -356,6 +354,7 @@
             if (this.isImportance){
                 this._importanceCheckbox.setAttribute('checked', 'checked');
                 cardElement.classList.add('card--importance');
+
             }
             let importanceCheckboxLabel = createElement({
                 tagName: 'label',
@@ -371,9 +370,6 @@
             if (this.isDone){
                 this._doneCheckbox.setAttribute('checked', 'checked');
                 cardElement.classList.add('card--done');
-            } else {
-                this._doneCheckbox.removeAttribute('checked');
-                cardElement.classList.remove('card--done');
             }
             let doneCheckboxLabel = createElement({
                 tagName: 'label',
@@ -386,10 +382,8 @@
             cardElement.append(this.titleElement, this.textElement, controlsContainer);
             return cardElement;
         }
-
-
     }
 
-    let app = new App();
+        let app = new App();
 
 }());

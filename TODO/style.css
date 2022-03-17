@@ -34,16 +34,42 @@ body{
  #doneCheckbox {
     margin: 0 0 0 15px;
 }
-/*.done{*/
-/*    position: relative;*/
-/*}*/
 
  .card--done{
-     /*position: absolute;*/
-     /*top: 0;*/
-     /*bottom: 0;*/
-     /*left: 0;*/
-     /*right: 0;*/
-     /*pointer-events: none;*/
      background-color: rgba(184, 210, 250, 0.25) !important;
  }
+
+ .important{
+     padding: 30px;
+     font-size: 20px;
+     font-weight: bold;
+     width: 100%;
+     height: 500px;
+     border: 2px solid rgba(255, 0, 0, 0.54);
+     box-shadow: -5px -5px 25px -5px rgba(241, 103, 103, 0.8) inset;
+     overflow: scroll;
+     margin-bottom: 20px;
+ }
+
+ .not-important{
+     padding: 30px;
+     font-size: 20px;
+     font-weight: bold;
+     width: 100%;
+     height: 500px;
+     border: 2px solid rgba(29, 140, 220, 0.54);
+     box-shadow: -5px -5px 25px -5px rgba(6, 72, 108, 0.8) inset;
+     overflow: scroll;
+     margin-bottom: 20px;
+ }
+.done-card{
+    padding: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+    height: 500px;
+    border: 2px solid rgba(107, 143, 102, 0.54);
+    box-shadow: -5px -5px 25px -5px rgba(81, 201, 66, 0.8) inset;
+    overflow: scroll;
+    margin-bottom: 20px;
+}
