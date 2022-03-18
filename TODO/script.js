@@ -124,7 +124,7 @@
                     })
                 })
                 this.cardsArr.forEach(card => {
-                    this._cardsBlock.append(card.element)
+                    this.notImportantBlock.append(card.element)
 
                 if (card.isImportance){
                     this.importantArr.push(this.cardsArr.sort(function (a, b) {
@@ -179,9 +179,9 @@
 
             if (this.formButton.dataset.role === 'create') {
                 let card = new Card(this.cardData);
-                this.cardsArr.push(card);
+                this.notImportantArr.push(card);
                 this._updateLS();
-                this._cardsBlock.append(card.element);
+                this.notImportantBlock.append(card.element);
             } else if (this.formButton.dataset.role === 'update') {
                 this.editableCard.title = this._nameField.value;
                 this.editableCard.text = this._descriptionField.value;
@@ -253,12 +253,21 @@
             this.cardsArr = this.cardsArr.sort(function (a, b) {
                 return a.title > b.title ? 1 : -1;
             })
+            // this.importantArr = this.importantArr.sort((a, b)=>{
+            //         return a.title > b.title ? 1 : -1;
+            // });
+            // this.notImportantArr = this.notImportantArr.sort((a, b)=>{
+            //     return a.title > b.title ? 1 : -1;
+            // });
+            // this.doneArr = this.doneArr.sort((a, b)=>{
+            //     return a.title > b.title ? 1 : -1;
+            // });
             this._updateLS();
             this._updateBlock();
         }
 
         sortByNameReverse() {
-            this.cardsArr = this.cardsArr.sort(function (a, b) {
+            this.cardsArr.sort( function (a, b){
                 return a.title < b.title ? 1 : -1;
             })
             this._updateLS();

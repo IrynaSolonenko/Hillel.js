@@ -48,7 +48,7 @@ body{
      border: 2px solid rgba(255, 0, 0, 0.54);
      box-shadow: -5px -5px 25px -5px rgba(241, 103, 103, 0.8) inset;
      overflow: scroll;
-     margin-bottom: 20px;
+     margin-bottom: 50px;
  }
 
  .not-important{
@@ -60,7 +60,7 @@ body{
      border: 2px solid rgba(29, 140, 220, 0.54);
      box-shadow: -5px -5px 25px -5px rgba(6, 72, 108, 0.8) inset;
      overflow: scroll;
-     margin-bottom: 20px;
+     margin-bottom: 50px;
  }
 .done-card{
     padding: 30px;
@@ -71,5 +71,4 @@ body{
     border: 2px solid rgba(107, 143, 102, 0.54);
     box-shadow: -5px -5px 25px -5px rgba(81, 201, 66, 0.8) inset;
     overflow: scroll;
-    margin-bottom: 20px;
 }
