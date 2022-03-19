@@ -60,9 +60,9 @@
         _attachEvents() {
             this.formButton.addEventListener('click', this._formAction.bind(this));
 
-            this.sortButton.addEventListener('click', this.sortByName.bind(this));
+            // this.sortButton.addEventListener('click', this.sortByName.bind(this));
 
-            this.sortReverseButton.addEventListener('click', this.sortByNameReverse.bind(this));
+            // this.sortReverseButton.addEventListener('click', this.sortByNameReverse.bind(this));
         }
 
         _createApp() {
@@ -106,7 +106,7 @@
             });
 
             this.appBlock.append(title, this._nameField, this._descriptionField, this.formButton, this._cardsBlock);
-            this._body.append(this.appBlock, this.importantBlock, this.notImportantBlock, this.doneBlock);
+            this._body.prepend(this.appBlock, this.importantBlock, this.notImportantBlock, this.doneBlock);
             this._body.before(this.sortButton, this.sortReverseButton);
         }
 
@@ -126,22 +126,28 @@
                 this.cardsArr.forEach(card => {
                     this.notImportantBlock.append(card.element)
 
-                if (card.isImportance){
-                    this.importantArr.push(this.cardsArr.sort(function (a, b) {
-                        return a.isImportance < b.isImportance ? 1 : -1;
-                    }))
-                    this.importantBlock.append(card.element)
-                } else{
-                    this.notImportantArr.push(this.cardsArr.sort(function (a, b) {
-                        return a.isImportance > b.isImportance ? -1 : 1;
-                    }))
-                    this.notImportantBlock.append(card.element)
-                }
+                    if (card.isImportance){
+                        this.importantArr.push(this.cardsArr.sort(function (a, b) {
+                            return a.isImportance < b.isImportance ? 1 : -1;
+                        }))
+                        // this.cardsArr.forEach(card=>{
+                        this.importantBlock.append(card.element);
+                        // })
+
+                    } else{
+                        this.notImportantArr.push(this.cardsArr.sort(function (a, b) {
+                            return a.isImportance > b.isImportance ? -1 : 1;
+                        }))
+                        this.notImportantBlock.append(card.element);
+                    }
                     if (card.isDone){
                         this.doneArr.push(this.cardsArr.sort(function (a, b) {
                             return a.isDone > b.isDone ? 1 : -1;
                         }))
                         this.doneBlock.append(card.element)
+                        // this.cardsArr.forEach(card=>{
+                        //     this.doneBlock.append(card.element)
+                        // })
                     }
                 })
             }
@@ -200,7 +206,7 @@
         }
 
         _updateLS() {
-            let cardsStates = this.cardsArr.map(card => {
+            let cardsStates = this.notImportantArr.map(card => {
                 return {
                     title: card.title,
                     text: card.text,
@@ -242,37 +248,28 @@
         }
 
         //создаем метод, который обновляет все карточки
-        _updateBlock() {
-            this.cardsArr.forEach(card => {
-                this._cardsBlock.append(card.element)
-            })
-        }
+        // _updateBlock() {
+        //     this.cardsArr.forEach(card => {
+        //         this._cardsBlock.append(card.element)
+        //     })
+        // }
 
         //создаем методы для сортировки в алфавитном порядке по названию карточки
-        sortByName() {
-            this.cardsArr = this.cardsArr.sort(function (a, b) {
-                return a.title > b.title ? 1 : -1;
-            })
-            // this.importantArr = this.importantArr.sort((a, b)=>{
-            //         return a.title > b.title ? 1 : -1;
-            // });
-            // this.notImportantArr = this.notImportantArr.sort((a, b)=>{
-            //     return a.title > b.title ? 1 : -1;
-            // });
-            // this.doneArr = this.doneArr.sort((a, b)=>{
-            //     return a.title > b.title ? 1 : -1;
-            // });
-            this._updateLS();
-            this._updateBlock();
-        }
+        // sortByName() {
+        //     this.cardsArr = this.cardsArr.sort(function (a, b) {
+        //         return a.title > b.title ? 1 : -1;
+        //     })
+        //     this._updateLS();
+        //     this._updateBlock();
+        // }
 
-        sortByNameReverse() {
-            this.cardsArr.sort( function (a, b){
-                return a.title < b.title ? 1 : -1;
-            })
-            this._updateLS();
-            this._updateBlock();
-        }
+        // sortByNameReverse() {
+        //     this.cardsArr.sort( function (a, b){
+        //         return a.title < b.title ? 1 : -1;
+        //     })
+        //     this._updateLS();
+        //     this._updateBlock();
+        // }
     }
 
     class Card {
@@ -305,7 +302,8 @@
                 app.updateCard(this, true);
                 if (this.isImportance){
                     this.element.classList.add('card--importance');
-                    app.importantBlock.append(this.element)
+                    app.importantBlock.append(this.element);
+                    app._updateLS()
                 } else {
                     this.element.classList.remove('card--importance');
                     app.notImportantBlock.append(this.element);
@@ -393,6 +391,7 @@
         }
     }
 
-        let app = new App();
+    let app = new App();
 
 }());
+
