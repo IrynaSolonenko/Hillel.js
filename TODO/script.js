@@ -60,9 +60,9 @@
         _attachEvents() {
             this.formButton.addEventListener('click', this._formAction.bind(this));
 
-            // this.sortButton.addEventListener('click', this.sortByName.bind(this));
+            this.sortButton.addEventListener('click', this.sortByName.bind(this));
 
-            // this.sortReverseButton.addEventListener('click', this.sortByNameReverse.bind(this));
+            this.sortReverseButton.addEventListener('click', this.sortByNameReverse.bind(this));
         }
 
         _createApp() {
@@ -123,35 +123,46 @@
                         isDone: cardData.done
                     })
                 })
-                this.cardsArr.forEach(card => {
-                    this.notImportantBlock.append(card.element)
 
+                this.cardsArr.forEach(card =>{
                     if (card.isImportance){
-                        this.importantArr.push(this.cardsArr.sort(function (a, b) {
-                            return a.isImportance < b.isImportance ? 1 : -1;
-                        }))
-                        // this.cardsArr.forEach(card=>{
+                        this.importantArr.push(card);
                         this.importantBlock.append(card.element);
-                        // })
-
-                    } else{
-                        this.notImportantArr.push(this.cardsArr.sort(function (a, b) {
-                            return a.isImportance > b.isImportance ? -1 : 1;
-                        }))
+                    } else {
+                        this.notImportantArr.push(card);
                         this.notImportantBlock.append(card.element);
                     }
-                    if (card.isDone){
-                        this.doneArr.push(this.cardsArr.sort(function (a, b) {
-                            return a.isDone > b.isDone ? 1 : -1;
-                        }))
+                    if (card.isDone || (card.isDone && card.isImportance)){
+                        this.doneArr.push(card);
                         this.doneBlock.append(card.element)
-                        // this.cardsArr.forEach(card=>{
-                        //     this.doneBlock.append(card.element)
-                        // })
                     }
                 })
+
             }
         }
+
+        sortByName(){
+            // this.importantArr.sort(function (a, b) {
+            //         return a.title > b.title ? 1 : -1;
+            //     })
+            // this._updateLS();
+
+            this.importantArr.forEach(()=>{
+                this.cardsArr.sort(function (a, b) {
+                    return a.title > b.title ? 1 : -1;
+                })
+            })
+        }
+
+        sortByNameReverse(){
+            this.importantArr.forEach(()=>{
+                this.cardsArr.sort(function (a, b) {
+                    return a.title < b.title ? 1 : -1;
+                })
+            })
+        }
+
+
 
         _getFormData() {
             let cardData = {}
@@ -247,29 +258,6 @@
             this.editableCard = card;
         }
 
-        //создаем метод, который обновляет все карточки
-        // _updateBlock() {
-        //     this.cardsArr.forEach(card => {
-        //         this._cardsBlock.append(card.element)
-        //     })
-        // }
-
-        //создаем методы для сортировки в алфавитном порядке по названию карточки
-        // sortByName() {
-        //     this.cardsArr = this.cardsArr.sort(function (a, b) {
-        //         return a.title > b.title ? 1 : -1;
-        //     })
-        //     this._updateLS();
-        //     this._updateBlock();
-        // }
-
-        // sortByNameReverse() {
-        //     this.cardsArr.sort( function (a, b){
-        //         return a.title < b.title ? 1 : -1;
-        //     })
-        //     this._updateLS();
-        //     this._updateBlock();
-        // }
     }
 
     class Card {
@@ -303,7 +291,7 @@
                 if (this.isImportance){
                     this.element.classList.add('card--importance');
                     app.importantBlock.append(this.element);
-                    app._updateLS()
+                    app._updateLS();
                 } else {
                     this.element.classList.remove('card--importance');
                     app.notImportantBlock.append(this.element);
@@ -394,4 +382,5 @@
     let app = new App();
 
 }());
+
 
