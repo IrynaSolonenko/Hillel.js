@@ -1,11 +1,12 @@
 !(function (){
     let resultArr = [];
-    let newResultArr= [];
-    let residentsResultArr= [];
+    let newResultArr = [];
     let planetsTable = document.querySelector('#planetsTable');
-    let planetName = document.querySelector('#planet-name');
-    let residentName = document.querySelector('.resident-name');
     let requestURL = 'https://swapi.dev/api/planets/';
+
+    function useFetching (url) {
+        return fetch(url).then(response => response.json());
+    }
 
     function sendRequest(url) {
         fetch(url).then(response => {
@@ -13,37 +14,27 @@
         }).then(data => {
             resultArr = data.results;
             newResultArr = resultArr.slice();
-
-            sendResidentsRequest();
             createPlanetsName();
         })
     }
 
     function createPlanetsName(){
-        newResultArr.forEach(name=>{
-            let tr = document.createElement('tr');
-            tr.textContent += JSON.stringify(name.name);
-            planetName.append(tr)
+        newResultArr.forEach(planet => {
+            let planetTr = document.createElement('tr');
+            let planetNameTd = document.createElement('th');
+            planetNameTd.textContent = planet.name;
+            planetTr.append(planetNameTd);
+            planetsTable.append(planetTr);
+            let residentsArr = planet.residents;
+
+            residentsArr.forEach(resident => useFetching(resident).then(response => {
+                let residentTd = document.createElement('td');
+                residentTd.textContent = response.name;
+                planetTr.append(residentTd);
+            }))
         })
     }
 
-    function sendResidentsRequest() {
-        for (let i = 0; i < newResultArr.length; i++) {
-            newResultArr.forEach(resident => {
-                return fetch(resident.residents[i]).then(response => {
-                    return response.json();
-                }).then(data => {
-                    // residentsResultArr = data.name;
-                    // console.log(residentsResultArr);
-                    // console.log(data);
-                let residentTr = document.createElement('tr');
-                    residentTr.textContent += data.name;
-                console.log(data.name);
-                    residentName.append(residentTr)
-            })
-            })
-        }
-    }
     sendRequest(requestURL);
-
+    
 }());
