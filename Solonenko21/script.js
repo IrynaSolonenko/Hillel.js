@@ -1,9 +1,10 @@
 !(function (){
     let resultArr = [];
-    let residentsArr = [];
     let newResultArr= [];
-    let newResidentsArr= [];
+    let residentsResultArr= [];
     let planetsTable = document.querySelector('#planetsTable');
+    let planetName = document.querySelector('#planet-name');
+    let residentName = document.querySelector('.resident-name');
     let requestURL = 'https://swapi.dev/api/planets/';
 
     function sendRequest(url) {
@@ -12,44 +13,37 @@
         }).then(data => {
             resultArr = data.results;
             newResultArr = resultArr.slice();
-            console.log(newResultArr);
+
             sendResidentsRequest();
-            App();
+            createPlanetsName();
         })
     }
 
-    function sendResidentsRequest(){
-        for (let i=0; i < newResultArr.length; i++) {
+    function createPlanetsName(){
+        newResultArr.forEach(name=>{
+            let tr = document.createElement('tr');
+            tr.textContent += JSON.stringify(name.name);
+            planetName.append(tr)
+        })
+    }
+
+    function sendResidentsRequest() {
+        for (let i = 0; i < newResultArr.length; i++) {
             newResultArr.forEach(resident => {
                 return fetch(resident.residents[i]).then(response => {
                     return response.json();
                 }).then(data => {
-                    console.log(data.name);
-                })
+                    // residentsResultArr = data.name;
+                    // console.log(residentsResultArr);
+                    // console.log(data);
+                let residentTr = document.createElement('tr');
+                    residentTr.textContent += data.name;
+                console.log(data.name);
+                    residentName.append(residentTr)
+            })
             })
         }
     }
     sendRequest(requestURL);
-    function App() {
-        let best;
-        newResultArr.forEach(item=>{
-            best = document.createElement('tr');
-            planetsTable.innerHTML += `<td style="padding: 10px">${item.name}</td>
-                            <td style="padding: 10px">${item.climate}</td>
-                            <td style="padding: 10px">${item.created}</td>
-                            <td style="padding: 10px">${item.films}</td>
-                            <td style="padding: 10px">${item.gravity}</td>
-                            <td style="padding: 10px">${item.diameter}</td>
-                            <td style="padding: 10px">${item.orbital_period}</td>
-                            <td style="padding: 10px">${item.population}</td>
-                            <td style="padding: 10px">${item.residents}</td>
-                            <td style="padding: 10px">${item.rotation_period}</td>
-                            <td style="padding: 10px">${item.surface_water}</td>
-                            <td style="padding: 10px">${item.terrain}</td>
-                            <td style="padding: 10px">${item.url}</td>`;
-            planetsTable.append(best);
-
-        })
-    }
 
 }());
